@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ruby-mpd (0.3.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  ruby-mpd
+
+BUNDLED WITH
+   1.10.6

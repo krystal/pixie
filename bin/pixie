@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+$:.unshift(File.expand_path('../../lib', __FILE__))
+require 'pixie'
+universe = Pixie::Universe.new(ENV["PIXIE_SHOW_DIR"] || "./show")
+trap("INT") { exit }
+at_exit { universe.all_off; Pixie.mpd.stop }
+command = ARGV[0]
+case command
+when 'reset'
+  universe.all_off
+when 'play'
+  # Run a track with a given name
+  unless universe.play_track(ARGV[1].to_sym)
+    puts "! No track found matching #{ARGV[1]}"
+    exit 1
+  end
+when 'play_music'
+  if track = universe.tracks[ARGV[1].to_sym]
+    track.start_music
+    sleep 1000
+  else
+    puts "! No track found matching #{ARGV[1]}"
+    exit 1
+  end
+when 'elements'
+  universe.elements.each do |e|
+    puts e.inspect
+  end
+end
