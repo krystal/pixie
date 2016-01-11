@@ -20,14 +20,9 @@ module Pixie
     end
 
     def start_music
-      set_start_time = false
       Pixie.mpd.on :elapsed do |elapsed|
         puts elapsed
-        #unless set_start_time
-          $start_time = Time.now.to_f - elapsed
-          set_start_time = true
-          #puts "Reset start time based on music position... #{$start_time}"
-        #end
+        $start_time = Time.now.to_f - elapsed
       end
       Pixie.mpd.clear
       Pixie.mpd.add self.music_file
