@@ -9,17 +9,10 @@ case command
 when 'reset'
   universe.all_off
 when 'play'
-  # Run a track with a given name
-  unless universe.play_track(ARGV[1].to_sym)
-    puts "! No track found matching #{ARGV[1]}"
-    exit 1
-  end
-when 'play_music'
-  if track = universe.tracks[ARGV[1].to_sym]
-    track.start_music
-    sleep 1000
+  if run = universe.run(ARGV[1].to_sym)
+    run.go
   else
-    puts "! No track found matching #{ARGV[1]}"
+    puts "No track found match #{ARGV[1].to_sym}"
     exit 1
   end
 when 'elements'
