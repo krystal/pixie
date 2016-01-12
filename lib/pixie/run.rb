@@ -132,7 +132,7 @@ module Pixie
         end
 
         if sequence.last_frame? && sequence.instruction[:after]
-          additional_instructions += sequence.instruction[:after]
+          @additional_instructions += sequence.instruction[:after]
         end
 
         sequence.increment_current_frame

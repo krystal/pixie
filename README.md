@@ -72,7 +72,7 @@ track :example do
 
   at 0 do
     start_music
-    run Sequences::Static, :on => :tree_outline, :repeat => true
+    run :Static, :on => :tree_outline, :repeat => true
   end
 
   at :end do
@@ -127,12 +127,12 @@ track above but with a fade in at the start and a fade out at the end.
 
 ```ruby
 at 0 do
-  run Sequences::Static, :on => :tree_outline, :repeat => true
-  modify Modifiers::FadeIn, :on => :tree_outline
+  run :Static, :on => :tree_outline, :repeat => true
+  modify :FadeIn, :on => :tree_outline
 end
 
 at :end do
-  modify Modifiers::FadeOut, :on => :tree_outline
+  modify :FadeOut, :on => :tree_outline
 end
 ```
 

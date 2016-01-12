@@ -39,7 +39,7 @@ module Pixie
         end
 
         def run(sequence, options = {}, &after)
-          @array << options.merge({:action => :run, :sequence => sequence, :after => add_after(&after)})
+          @array << options.merge({:action => :run, :sequence => sequence_to_klass(sequence), :after => add_after(&after)})
         end
 
         def stop(element_name)
@@ -63,7 +63,7 @@ module Pixie
         end
 
         def modify(modifier, options = {}, &after)
-          @array << options.merge({:action => :modify, :modifier => modifier, :after => add_after(&after)})
+          @array << options.merge({:action => :modify, :modifier => modifier_to_klass(modifier), :after => add_after(&after)})
         end
 
         private
@@ -73,6 +73,22 @@ module Pixie
             sub_spec = self.class.new
             sub_spec.instance_eval(&block)
             sub_spec.array
+          end
+        end
+
+        def sequence_to_klass(name)
+          if name.is_a?(Symbol)
+            Pixie::Sequences.const_get(name.to_s)
+          else
+            name
+          end
+        end
+
+        def modifier_to_klass(name)
+          if name.is_a?(Symbol)
+            Pixie::Modifiers.const_get(name.to_s)
+          else
+            name
           end
         end
 
