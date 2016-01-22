@@ -86,7 +86,7 @@ module Pixie
             end
           end
         when :finish
-          all_off
+          @universe.all_off
           Process.exit
         when :start_music
           @track.start_music
@@ -100,6 +100,7 @@ module Pixie
     def set_frame_for_unit(unit)
       @frame_contents[unit] ||= []
       @running_sequences.each do |element, sequence|
+        next unless element.unit == unit.id
         sequence_frame = sequence.get_current_frame_safely(@previous_states[element])
         unless sequence_frame
           if sequence.repeat?

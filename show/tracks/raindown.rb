@@ -1,12 +1,12 @@
 track :raindown do
-  frame_rate 60
+  frame_rate 70
   music_file 'raindown.m4a'
 
   at 0 do
     start_music
-    #modify Modifiers::FadeIn, :on =>:bottom_strip, :options => {:speed => 100} do
-    #  modify Modifiers::Pulsate, :on => :bottom_strip, :reverse => true, :repeat => true, :options => {:speed => 30}
-    #end
+    modify Modifiers::FadeIn, :on =>:bottom_strip, :options => {:speed => 100} do
+      modify Modifiers::Pulsate, :on => :bottom_strip, :reverse => true, :repeat => true, :options => {:speed => 30}
+    end
     run Sequences::Worm,
       :on => :bottom_strip,
       :repeat => false,

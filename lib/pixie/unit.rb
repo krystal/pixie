@@ -19,6 +19,7 @@ module Pixie
 
     def send_udp_packet(packet)
       prefix = [pin, final ? 1 : 0].pack('CC')
+
       udp_socket.send(prefix + packet, 0, self.ip_address, self.port)
     end
 
