@@ -6,6 +6,8 @@ module Pixie
     attr_accessor :id
     attr_accessor :ip_address
     attr_accessor :port
+    attr_accessor :pin
+    attr_accessor :final
 
     def initialize(id)
       @id = id
@@ -16,7 +18,8 @@ module Pixie
     end
 
     def send_udp_packet(packet)
-      udp_socket.send(packet, 0, self.ip_address, self.port)
+      prefix = [pin, final ? 1 : 0].pack('CC')
+      udp_socket.send(prefix + packet, 0, self.ip_address, self.port)
     end
 
   end

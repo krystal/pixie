@@ -1,13 +1,11 @@
 element :bottom_strip do
   unit        1
-  pin         9
   leds        (0..59).to_a
 end
 
 element :top_strip do
-  unit        1
-  pin         9
-  leds        (60..119).to_a
+  unit        2
+  leds        (0..59).to_a
 end
 
 15.times do |i|
